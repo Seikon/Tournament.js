@@ -1,0 +1,21 @@
+<html>
+<head>
+
+	<script type="text/javascript" src="../Tournament.js"></script>
+	<script>
+		function init() {
+		
+		tor = new Tournament(document.getElementById("micanvas"),40,150,["Tesla","Einstein","Ada","Turing","Darwin","Newton","Kepler","Arquimides"],"black",[255,255,255],"black","white",MODE_ENUM.DIVIDED);
+		tor.init();
+		tor.generateTournament();
+		
+		}
+		
+	</script>
+</head>
+<body onload="init()">
+	<canvas id="micanvas" width="2660" height="810">
+		Se necesita html 5 
+	</canvas>
+<body>
+<html>
