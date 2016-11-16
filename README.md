@@ -14,6 +14,13 @@ Javascript library to generate canvas tournament brackets easily with automatic 
   <li>Divided: Tournament generates itself from left to a center point (Math.log2(number of participants)) and from right to the same center point.</li>
 </ul>
 
+<p>And two types of animation:</p>
+
+<ul>
+  <li>FadeOut: A participant appears in the next round from transparency 0 to 1</li>
+  <li>ByLetter: A participant appears in the next round letter by letter until its entire name is displayed</li>
+</ul>
+
 <p>You can find practical examples and images in "examples" folder with all types of visualization.</p>
 
 <p>Feel free to fork the repository and add new funcionalities to help grow up the library! :) </p>
