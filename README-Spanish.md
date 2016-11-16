@@ -16,6 +16,13 @@ Documentación en español para mejorar su difusión.
   <li>Divided: El torneo se genera desde la izquierda hasta el punto central de la ronda (Math.log2(numero de participantes)) y desde la derecha hasta el mismo punto central</li>
 </ul>
 
+<p>y Dos tipos de animación:</p>
+
+<ul>
+  <li>FadeOut: Un participante pasa de ronda de manera que va apareciendo en la casilla de una transparencía de cero a uno </li>
+  <li>ByLetter: Un participante pasa de ronda de manera que cada una de sus letras van apareciendo poco a poco</li>
+</ul>
+
 <p>Puedes encontrar ejemplos practios e imagenes en la carpeta "examples" con todos los tipos de visualización</p>
 
 <p>Sientete libre de pinchar el repositorio y añadir nuevas funcionalidades para ayudar a crecer la libreria :)</p>
