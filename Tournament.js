@@ -12,8 +12,40 @@ var MODE_ANIMATION = {
 	
 }
 
-//Constructor
+//Constructors
 function Tournament(canvas,cellHeight,cellWidth,participants,cellsColor,fontColor,backgroundColor,bracketsColor,mode,animation,fontType,fontSize) {
+	
+	//--Dimensions--
+    this.cellHeight = cellHeight;
+	this.cellWidth = cellWidth;
+	this.textWidth;
+	this.textHeight;
+	this.roundWidth;
+	this.textmargin = 10;
+	//--References--
+	this.self = this;
+	//--Tournament Abstractions--
+	this.cellCords = [];
+	this.participants = participants;	
+	this.winner = false;
+	//---Style---
+	this.cellsColor = cellsColor;
+	this.fontColor = fontColor;
+	this.backgroundColor = backgroundColor;
+	this.bracketsColor = bracketsColor;
+	this.fontType = fontType;
+	this.fontSize = fontSize;
+	//---Canvas--
+	this.canvas = canvas;
+	this.ctx = this.canvas.getContext("2d");
+	//--Control Intervals
+	this.animationIntervals = [];
+	//--Enums--
+	this.mode = mode;
+	this.animation = animation;
+}
+
+function Tournament(canvas,cellHeight,cellWidth,participants,cellsColor,fontColor,backgroundColor,bracketsColor,mode,animation,fontType,fontSize,handlerWinner) {
 	
 	//--Dimensions--
     this.cellHeight = cellHeight;
@@ -42,6 +74,7 @@ function Tournament(canvas,cellHeight,cellWidth,participants,cellsColor,fontColo
 	//--Enums--
 	this.mode = mode;
 	this.animation = animation;
+	this.handlerWinner = handlerWinner;
 }
 
 Tournament.prototype.init = function() {
@@ -98,10 +131,13 @@ Tournament.prototype.fadeOut = function(text,x,y,width,height,font) {
 						clearInterval(secuence);
 						intervals.splice(0,1);
 
-						if(intervals.length === 0)
+						if(intervals.length === 0) {
 							self.canvas.addEventListener("mousedown",self.touchStartHandler,false);
 							self.canvas.addEventListener("touchstart",self.touchStartHandler,false);
-						
+							
+							if(self.winner)
+								self.handlerWinner();
+						}
 					}
 					
 				},30,alpha,intervals);
@@ -134,10 +170,13 @@ Tournament.prototype.byletter = function(text,x,y,width,height,font) {
 						clearInterval(secuence);
 						intervals.splice(0,1);
 
-						if(intervals.length === 0)
+						if(intervals.length === 0) {
 							self.canvas.addEventListener("mousedown",self.touchStartHandler,false);
 							self.canvas.addEventListener("touchstart",self.touchStartHandler,false);
-						
+							
+							if(self.winner)
+								self.handlerWinner();
+						}
 					}
 					
 					textIndex ++;
@@ -172,6 +211,7 @@ Tournament.prototype.moveNextRound = function(participant) {
 	var destiny = this.calculateNextRound(participant);
 	//search the teorical destiny of the participant with all cells and introuce it in the cell
 	//It could have no destiny because of last round winner
+	
 	for(i=0; i < this.cellCords.length;i++)
 	{
 		if(this.cellCords[i].round === destiny.round && this.cellCords[i].cell === destiny.cell)
@@ -181,8 +221,23 @@ Tournament.prototype.moveNextRound = function(participant) {
 		}
 
 	}
+	//if last round
+	if(participant.round === this.totalRounds) {
+		
+		this.winner = true;
+		
+	}
 	
 }
+
+//This function is called when we decided a winner in the final round.
+// It is a callback function, so you can control it with the property handlerWinner of the class.
+Tournament.prototype.eventWinner = function() {
+	
+	//execute the function defined by handlerWinner property
+	this.handlerWinner();
+}
+
 //This functions returns the next round and cell when user click in a cell (this produce battle resolution)
 Tournament.prototype.calculateNextRound = function(participant) {
 	//To calculate that only sum one round to the participant. And to calculate the cell, use the whole part of a cell number divided by 2
