@@ -5,9 +5,9 @@ Javascript library to generate canvas tournament brackets easily with automatic 
 
 <p>This library wants to develop a simply solution for web projects that need Tournaments diagrams deploying it in a few lines, but with the flexibility of customize the visualization and design</p>
 
-<p>Based on HTML5 canvas to generate Graphics and Text. It allows to customize the size and style of each element,implements animations and fit automatically with the brackets.</p>
+<p>Based on HTML5 canvas to generate Graphics and Text. It allows to customize the size and style of each element,implements animations and fit it automatically with the brackets.</p>
 
-<p>For the moment the library has only the direct-elimination tournament with 2 ways of visualization:</p>
+<p>For the moment the library has only the direct-elimination (Play-off) tournament with 2 ways of visualization:</p>
 
 <ul>
   <li>Normal: Tournament  generates itself from left to right </li>
